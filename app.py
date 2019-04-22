@@ -68,15 +68,11 @@ def garden_tool_detail(id):
 @app.route("/garden_tool/<id>", methods=["PUT"])
 def garden_tool_update(id):
     garden_tool = GardenTool.query.get(id)
-    weight = request.get_json()["weight"]
-    price = request.get_json()["price"]
-    country_of_origin = request.get_json()["country_of_origin"]
-    manufacturer = request.get_json()["manufacturer"]
 
-    garden_tool.weight = weight
-    garden_tool.price = price
-    garden_tool.country_of_origin = country_of_origin
-    garden_tool.manufacturer = manufacturer
+    garden_tool.weight = request.get_json()["weight"]
+    garden_tool.price = request.get_json()["price"]
+    garden_tool.country_of_origin = request.get_json()["country_of_origin"]
+    garden_tool.manufacturer = request.get_json()["manufacturer"]
 
     db.session.commit()
     return garden_tool_schema.jsonify(garden_tool)
